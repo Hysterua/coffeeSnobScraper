@@ -1,4 +1,4 @@
-# coffeeSnobScrapper
+# coffeeSnobScraper
 A quick project in order to get the best deals from the coffeeSnobs forum; those that are free.
 
 This is a simple automation project that involves webscrapping through the coffeeSnobs forum, finding new listings and emailing them to the user. This is done so I don't have to sit around and browse the site all day.
