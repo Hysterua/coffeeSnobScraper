@@ -2,31 +2,35 @@ import requests
 from sendEmail import send_email
 from bs4 import BeautifulSoup
 
-URL = "https://coffeesnobs.com.au/forum/market-square/pay-it-forward"
-page = requests.get(URL)
+while True:
 
-results = BeautifulSoup(page.content, "html.parser")
-coffeeListing = results.find_all("a",class_="topic-title js-topic-title")
+    URL = "https://coffeesnobs.com.au/forum/market-square/pay-it-forward"
+    page = requests.get(URL)
 
-# opens a textfile that holds any previously saved listings so the code doesn't have to stay active
-with open('coffeeText.txt', 'r+') as f:
+    results = BeautifulSoup(page.content, "html.parser")
+    coffeeListing = results.find_all("a",class_="topic-title js-topic-title")
 
-    textHolder = f.read()
+    # opens a textfile that holds any previously saved listings so the code doesn't have to stay active
+    with open('coffeeText.txt', 'r+') as f:
 
-    # checks if the coffeeListing text is in the string 'textHolder'
-    for c in coffeeListing:
-        print(f"c is {c.text}")
+        textHolder = f.read()
 
-        # if text isn't found sends an email to the user
-        if c.text not in textHolder:
-            print("New Listing Detected!")
+        # checks if the coffeeListing text is in the string 'textHolder'
+        for c in coffeeListing:
+            print(f"c is {c.text}")
 
-            print("Sending Email...")
-            send_email(c.text)
-            print("Email Sent!")
+            # if text isn't found sends an email to the user
+            if c.text not in textHolder:
+                print("New Listing Detected!")
 
-            f.write(f"{c.text} \n")
+                print("Sending Email...")
+                send_email(c.text)
+                print("Email Sent!")
 
-        else:
-            print("--- Already In List --- \n")
+                f.write(f"{c.text} \n")
+
+            else:
+                print("--- Already In List --- \n")
         
+
+    sleep(600)
