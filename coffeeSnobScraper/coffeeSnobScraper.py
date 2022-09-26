@@ -11,6 +11,7 @@ while True:
     coffeeListing = results.find_all("a",class_="topic-title js-topic-title")
 
     # opens a textfile that holds any previously saved listings so the code doesn't have to stay active
+
     with open('coffeeText.txt', 'r+') as f:
 
         textHolder = f.read()
